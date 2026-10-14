@@ -6,7 +6,7 @@
 
 #include "KPM_matcher.h"
 
-int task_1() {
+void task_1() {
 	auto start = std::chrono::steady_clock::now();
 	std::cout <<"❈ Thinking..." <<std::endl;
 
