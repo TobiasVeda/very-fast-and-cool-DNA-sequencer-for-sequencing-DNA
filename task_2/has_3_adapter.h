@@ -5,7 +5,7 @@
 // exactly, or -1 if there is none.
 // The adapter may be cut off by the end of the read: a partial match that runs
 // to the end of dna counts as a match (typical for 3' adapters).
-int has_3_adapter(const std::string &dna, const std::string &adapter, const double allowed_mismatch_percentage = 0) {
+int has_3_adapter(const std::string &dna, const std::string &adapter, const int allowed_mismatch_percentage = 0) {
 
 	int global_i = 0;		// Candidate start position of the adapter in dna
 	int i = 0;				// Current position in dna during a match attempt

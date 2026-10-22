@@ -11,9 +11,10 @@ void task_1() {
 	std::cout <<"❈ Thinking..." <<std::endl;
 
 	std::string adapter = "TGGAATTCTCGGGTGCCAAGGAACTCCAGTCACACAGTGATCTCGTATGCCGTCTTCTGCTTG";
+	// std::string adapter = "AGATCGGAAGAGCACACGTCTGAACTCCAGTCACGTAGAGATCTCGTATGCCGTCTTCTGCTTGAA"; // task 4
 
-	auto matcher = new KPM::KPM_matcher();
-	matcher->construct_LPS(adapter);
+	auto matcher = KPM::KPM_matcher();
+	matcher.construct_LPS(adapter);
 
 	std::fstream myFile("dna_files/s_3_sequence_1M.txt");
 	std::string dna;
@@ -22,7 +23,7 @@ void task_1() {
 	std::map<int, int> histogram;
 
 	while (getline (myFile, dna)) {
-		int match_start = matcher->compare(dna);
+		int match_start = matcher.compare(dna);
 		if (match_start != -1) {
 
 			histogram[match_start] += 1;
@@ -32,15 +33,15 @@ void task_1() {
 	}
 
 	cout_buffer.append("\n");
+	cout_buffer.append("length,occurrence\n");
 	for (auto [key, value] : histogram) {
 		// std::cout <<"Stripped length " <<key <<" occurs " <<value <<" number of times\n";
-		cout_buffer.append("Stripped length " + std::to_string(key) + " occurs " + std::to_string(value) + " number of times\n");
+		cout_buffer.append(std::to_string(key) + "," + std::to_string(value) + "\n");
 	}
 
 	std::cout <<cout_buffer <<std::endl;
 	std::cout <<"Found " <<count <<" matches (including complete matches/overlaps)" <<std::endl;
 
-	delete matcher;
 	myFile.close();
 
 	auto end = std::chrono::steady_clock::now();

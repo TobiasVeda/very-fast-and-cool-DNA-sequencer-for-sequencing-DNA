@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <climits>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -15,6 +16,7 @@ Kmer::Kmer(const int ksize, const double threshold, const double required_covera
 }
 
 void Kmer::add_kmer(const std::string& dna) {
+	_unique_sequences[dna] += 1;
 	++_line_count;
 
 	for (int i = 0; i < dna.length(); ++i) {
@@ -101,4 +103,48 @@ void Kmer::print_candidate() {
 	}
 
 	std::cout <<_candidate <<std::endl;
+}
+
+void Kmer::print_sequence_distribution() {
+
+	// Collect only the entries that pass the threshold
+	std::vector<std::pair<std::string, int>> entries;
+	for (const auto &[key, value] : _unique_sequences)
+	{
+		if (value < 1000)
+		{
+			continue;
+		}
+		entries.emplace_back(key, value);
+	}
+
+	// Sort by occurrence descending, then by sequence ascending for ties
+	std::sort(entries.begin(), entries.end(),
+			  [](const auto &a, const auto &b)
+			  {
+				  if (a.second != b.second)
+				  {
+					  return a.second > b.second;
+				  }
+				  return a.first < b.first;
+			  });
+
+	std::cout << "occurrence,sequence\n";
+	for (const auto &[key, value] : entries)
+	{
+		std::cout << value << "," << key << "\n";
+	}
+}
+
+void Kmer::print_unique_sequences_to_file(const std::string& file) {
+	std::ofstream myFile(file);
+
+	if (!myFile.is_open()) {
+		std::cerr << "Could not open file\n";
+		return;
+	}
+	for (const auto &[key, value] : _unique_sequences)	{
+		myFile <<key <<"\n";
+	}
+	myFile.close();
 }

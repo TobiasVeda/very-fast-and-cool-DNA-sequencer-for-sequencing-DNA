@@ -89,3 +89,8 @@ fabric.properties
 /dna_files/s_3_sequence_1M.txt
 /dna_files/s_1-1_1M.txt
 /.idea/very-fast-and-cool-DNA-sequencer-for-sequencing-DNA.iml
+/task_4/BWT.cpp
+/task_4/BWT.h
+/dna_files/sc.py
+/task_4/Suffix_tree.cpp
+/task_4/Suffix_tree.h
