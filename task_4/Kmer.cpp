@@ -38,8 +38,7 @@ void Kmer::find_candidate() {
 	int seed_count = max->second;
 	_candidate = seed;
 
-
-	for (int i = 1; true; ++i) {
+	for (int i = 1; i < 9999; ++i) {
 		const std::string A = _candidate.substr(i).append("A");
 		const std::string T = _candidate.substr(i).append("T");
 		const std::string G = _candidate.substr(i).append("G");
@@ -61,12 +60,14 @@ void Kmer::find_candidate() {
 		if (fraction <= _threshold || total < _required_coverage * seed_count) {
 			break;
 		}
+		if (best_key == _candidate.substr(_candidate.size() - _ksize)) {
+			break; // Best next k-mer is the current k-mer: self-loop
+		}
 		_candidate.push_back(best_key.back());
 		_strength.push_back(fraction);
 	}
 
-
-	for (int i = 0; true; ++i) {
+	for (int i = 0; i < 9999; ++i) {
 		const std::string A = _candidate.substr(0, _ksize -1).insert(0, 1, 'A');
 		const std::string T = _candidate.substr(0, _ksize -1).insert(0, 1, 'T');
 		const std::string G = _candidate.substr(0, _ksize -1).insert(0, 1, 'G');
@@ -87,6 +88,9 @@ void Kmer::find_candidate() {
 		const double fraction = static_cast<double>(occurrences) / total;
 		if (fraction <= _threshold || total < _required_coverage * seed_count) {
 			break;
+		}
+		if (best_key == _candidate.substr(0, _ksize)) {
+			break; // Best next k-mer is the current k-mer: self-loop
 		}
 		_candidate.insert(0, 1, best_key[0]);
 		_strength.insert(_strength.begin(), fraction);

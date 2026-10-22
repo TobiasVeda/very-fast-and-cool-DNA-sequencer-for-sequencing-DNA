@@ -1,5 +1,7 @@
 
 #include "Kmer.h"
+#include "remove_lines_with_adapter.h"
+#include "count_adapter_occurrence.h"
 #include "subtask4_1.h"
 #include "subtask4_2.h"
 #include "subtask4_3.h"
@@ -25,33 +27,59 @@ void task_4() {
 	// Find adapter
 	// READS: main set
 	// PRINTS: adapter
-	subtaks4_1(
-	"dna_files/tdt4287-unknown-adapter.txt"
-	);
+	// subtaks4_1(
+	// "dna_files/seqset3.txt"
+	// );
 
 	// Remove adapter, write file, print length distribution
 	// READS: main set, WRITES: stripped adapter
 	// PRINTS: length distribution
-	subtask4_2(
-	"AGATCGGAAGAGCACACGTCTGAACTCCAGTCACGTAGAGATCTCGTATGCCGTCTTCTGCTTGAA",
-	"dna_files/tdt4287-unknown-adapter.txt",
-	"dna_files/task4/stripped_adapter.txt"
-	);
+	// subtask4_2(
+	// "TGGAATTCTCGGGTGCCAAGGAACTCCAGTCA",
+	// "dna_files/seqset3.txt",
+	// "dna_files/task4/stripped_adapter.txt"
+	// );
 
 
 	// Reads stripped and writes deduplicated, prints frequency distribution
 	// READS: stripped adapter, WRITES: deduplicated stripped adapter
 	// PRINTS: frequency distribution
-	subtask4_3(
-	"dna_files/task4/stripped_adapter.txt",
-	"dna_files/task4/deduplicated_stripped_adapter.txt"
-	);
+	// subtask4_3(
+	// "dna_files/task4/stripped_adapter.txt",
+	// "dna_files/task4/deduplicated_stripped_adapter.txt"
+	// );
 
 
 	// Check unique sequence set, any common suffix?
 	// READS: deduplicated stripped adapter
 	// PRINTS: adapter
-	subtask4_4(
-	"dna_files/task4/deduplicated_stripped_adapter.txt"
-	); // AAACCGTTACCATTACTGAGT
+	// subtask4_4(
+	// "dna_files/task4/deduplicated_stripped_adapter.txt"
+	// );
+
+	
+	// remove_lines_with_adapter(
+	// 	"AAAAAAAAAAAAAAA",
+	// 	"dna_files/task4/deduplicated_stripped_adapter.txt",
+	// 	"dna_files/task4/deduplicated_stripped_adapter_second_round.txt"
+	// );
+	// subtask4_4(
+	// 	"dna_files/task4/deduplicated_stripped_adapter_second_round.txt"
+	// );
+
+
+	// remove_lines_with_adapter(
+	// 	"CGCGACCTCAGATCAGACGTGGCGACCCGCTG",
+	// 	"dna_files/task4/deduplicated_stripped_adapter_second_round.txt",
+	// 	"dna_files/task4/deduplicated_stripped_adapter_third_round.txt"
+	// );
+	// subtask4_4(
+	// 	"dna_files/task4/deduplicated_stripped_adapter_third_round.txt"
+	// );
+
+	// count_adapter_occurrence(
+	// "ATTGATCATCGACACTTCGAACGCACTTGCGGCCCCGGGT",
+	// "dna_files/task4/deduplicated_stripped_adapter_third_round.txt"
+	// );
+
 }

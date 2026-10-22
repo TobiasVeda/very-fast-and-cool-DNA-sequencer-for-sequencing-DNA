@@ -42,9 +42,17 @@ void subtask4_2(const std::string &ADAPTER, const std::string &READ, const std::
 	}
 	std::cout <<std::endl;
 	std::cout <<"Length distribution of adapter-stripped sequences" <<std::endl;
-	std::cout <<"length,occurrence" <<std::endl;
-	for (const auto &[key, value] : length_distribution)	{
-		std::cout <<key <<"," <<value <<std::endl;
+	std::vector<std::pair<int, int>> sorted_distribution(
+		length_distribution.begin(),
+		length_distribution.end()
+	);
+	std::sort(sorted_distribution.begin(), sorted_distribution.end(),
+		[](const auto& a, const auto& b) {
+			return a.first < b.first;  // Sort by key, ascending
+		});
+	std::cout << "length,occurrence" << std::endl;
+	for (const auto& [key, value] : sorted_distribution) {
+		std::cout << key << "," << value << std::endl;
 	}
 
 	std::ofstream myOtherFile(WRITE);
