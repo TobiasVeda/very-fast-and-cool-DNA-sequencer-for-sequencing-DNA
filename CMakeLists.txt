@@ -19,4 +19,7 @@ add_executable(very_fast_and_cool_DNA_sequencer_for_sequencing_DNA main.cpp
         task_4/has_3_adapter_edit.h
         task_4/remove_lines_with_adapter.h
         task_4/count_adapter_occurrence.h
+        task_3/task_3.h
+        task_3/Edit_distance_extended.cpp
+        task_3/Edit_distance_extended.h
 )

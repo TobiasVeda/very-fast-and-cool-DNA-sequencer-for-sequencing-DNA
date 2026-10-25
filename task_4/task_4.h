@@ -27,9 +27,9 @@ void task_4() {
 	// Find adapter
 	// READS: main set
 	// PRINTS: adapter
-	// subtaks4_1(
-	// "dna_files/seqset3.txt"
-	// );
+	subtaks4_1(
+	"dna_files/tdt4287-unknown-adapter.txt"
+	);
 
 	// Remove adapter, write file, print length distribution
 	// READS: main set, WRITES: stripped adapter
